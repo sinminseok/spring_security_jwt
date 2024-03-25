@@ -1,0 +1,45 @@
+# Spring Datasource Configuration
+spring:
+  sql:
+    init:
+      mode: always
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/model?serverTimezone=Asia/Seoul
+    username: root
+    password: sin981023@
+
+  # JPA Configuration
+  jpa:
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQLDialect
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 97616906818-6co3h9anum6cp6vb9or4s2hojoh5ji26.apps.googleusercontent.com
+            client-secret: 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
+            scope: profile, email
+
+logging:
+  level:
+    me.selvernine: DEBUG
+
+jwt:
+  secretKey: Z2ZkZmdkZmxrZ2pkbGZrZ2pzYXNkamtoYXNrZGphaHNka2fahgvfahvduyasdffjkhsgdfjkhasgfjkphaGRhc2Rhc2Rhc2Rhc2Rhc2ZhZmdzZAo
+
+  access:
+    expiration: 3600000 # 1??(60?) (1000L(ms -> s) * 60L(s -> m) * 60L(m -> h))
+    header: Authorization
+
+  refresh:
+    expiration: 1209600000 #  (1000L(ms -> s) * 60L(s -> m) * 60L(m -> h) * 24L(h -> ??) * 14(2?))
+    header: Authorization-refresh
