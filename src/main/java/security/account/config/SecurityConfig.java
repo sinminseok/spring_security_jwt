@@ -99,28 +99,27 @@ public class SecurityConfig {
         return new ProviderManager(provider);
     }
 
+    // jwt 인증필터 빈 등록
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
         JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(jwtService, userRepository);
         return jwtAuthenticationFilter;
     }
 
-    /**
-     * 로그인 성공 시 호출되는 LoginSuccessJWTProviderHandler 빈 등록
-     */
+     // 로그인 성공 시 호출되는 LoginSuccessHandler 빈 등록
+
     @Bean
     public LoginSuccessHandler loginSuccessHandler() {
         return new LoginSuccessHandler(jwtService, userRepository);
     }
 
-    /**
-     * 로그인 실패 시 호출되는 LoginFailureHandler 빈 등록
-     */
+     // 로그인 실패 시 호출되는 LoginFailureHandler 빈 등록
     @Bean
     public LoginFailureHandler loginFailureHandler() {
         return new LoginFailureHandler();
     }
 
+    // 패스워드 인코딩을 위한 기능 빈 등록
     @Bean
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
